@@ -1,0 +1,10 @@
+> Create a Node.js project. (npm init)
+> Install express.js (npm i express)
+> Install mongoose which is an abstraction layer of mongoDB. (npm i mongoose)
+> Add index.js to script in package.json ("abc":"nodemon index.js")
+> To start the server. (npm run abc)
+---------Points to remember----------
+> Node js doesn't support ES6 import directly.
+> Nodemon is a command-line tool that helps with the speedy development of Node. js applications. It monitors your project directory and automatically restarts your node application when it detects any changes. (npm i -D nodemon)
+____________________Mongo Pass_______________________
+<samyaya2003305>

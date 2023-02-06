@@ -1,0 +1,5 @@
+> Dependencies in React are things that a component needs to work correctly. Dependencies can be tools or libraries often stored in a folder called "node_modules".In other words, dependencies in React are like ingredients for a recipe.
+> In computing, a schema is a blueprint or structure for organizing and representing data. A schema defines the fields or attributes that make up a specific type of data, as well as the relationships between different types of data and the constraints or rules that govern the data.
+For example, in a relational database, a schema defines the structure of tables, columns, and relationships between tables. In an XML or JSON document, a schema defines the structure of elements, attributes, and relationships between elements.
+Schemas are used to ensure that data is consistent, well-structured, and adheres to a specific set of rules and constraints. By defining a schema, you can ensure that data is entered in a specific format and can be easily queried and processed.
+In summary, a schema is a way of defining and organizing data so that it can be stored, processed, and exchanged in a consistent and standardized manner.
