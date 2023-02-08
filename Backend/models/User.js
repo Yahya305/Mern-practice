@@ -1,7 +1,6 @@
 const mongoose = require("mongoose")
 const { Schema } = mongoose;
 
-console.log("dfsdkfnsdfnsdnsfjvbfjb")
 const userSchema = new mongoose.Schema({
   firstName:  {
     type:String,

@@ -3,6 +3,11 @@
 > Install mongoose which is an abstraction layer of mongoDB. (npm i mongoose)
 > Add index.js to script in package.json ("abc":"nodemon index.js")
 > To start the server. (npm run abc)
+-------------Auth---------------
+> Use <express-validator> to check for valid email and pass and many more etc.
+> Use <bcryptjs> for hashing, salting and peppering.
+> Use <jsonwebtoken> (JWT) to avoid sign-in on each time user visits the app.
+> The token contains three portion [Header,Data,Signature].
 ---------Points to remember----------
 > Node js doesn't support ES6 import directly.
 > Nodemon is a command-line tool that helps with the speedy development of Node. js applications. It monitors your project directory and automatically restarts your node application when it detects any changes. (npm i -D nodemon)
