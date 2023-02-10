@@ -5,6 +5,7 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: ".env.local" });
+const fetchuser=require("../middleware/fetchuser");
 
 router.post(
   "/Sign-in",
@@ -82,6 +83,16 @@ router.post(
     }
   }
 );
+
+router.post("/getuser",fetchuser,(req,res)=>{
+  try {
+    // req.user is retrived using middleware (fetchuser)
+    res.status(200).send(req.user)
+  } catch (error) {
+    console.log(error)
+    res.send(error)
+  }
+})
 
 module.exports = router;
 
