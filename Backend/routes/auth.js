@@ -4,7 +4,8 @@ const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-require("dotenv").config({ path: ".env.local" });
+// require("dotenv").config({ path: ".env.local" }); //Use when run from backend folder
+require("dotenv").config({ path: "./Backend/.env.local" }); //Use when npm run both
 const fetchuser=require("../middleware/fetchuser");
 
 router.post(

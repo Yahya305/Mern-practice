@@ -22,10 +22,11 @@ router.post(
         return res.status(400).json({ errors: errors.array()[0].msg });
       }
       const notes = new Notes({ ...req.body, user: req.user.id });
+      console.log(notes.id,"oooooooooooooooooooooooo")
       await notes.save();
       //   console.log(req.body);
       console.log(notes.user);
-      res.status(200).json(req.body);
+      res.status(200).json({...req.body,_id:notes.id});
     } catch (error) {
       console.log(error);
     }
