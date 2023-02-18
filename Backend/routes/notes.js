@@ -9,11 +9,11 @@ router.post(
   "/postnote",
   fetchuser,
   [
-    body("title", "Enter a valid Title").isLength({ min: 2 }),
-    body("description", "Enter a valid Description").isLength({ min: 3 }),
-    body("author", "Enter a valid author").isLength({ min: 3 }),
-    body("tags", "Enter atleast one tag.").isLength({ min: 3 }),
-    body("date", "Invalid date.").isDate(),
+    body("title", "Enter a valid Title").isLength({ min: 1 }),
+    // body("description", "Enter a valid Description").isLength({ min: 3 }),
+    // body("author", "Enter a valid author").isLength({ min: 3 }),
+    // body("tags", "Enter atleast one tag.").isLength({ min: 3 }),
+    // body("date", "Invalid date.").isDate(),    //Not checking date bcz woh browser auto set krega
   ],
   async (req, res) => {
     try {
@@ -25,8 +25,10 @@ router.post(
       console.log(notes.id,"oooooooooooooooooooooooo")
       await notes.save();
       //   console.log(req.body);
+      const savedNote = await Notes.findById(notes.id);
       console.log(notes.user);
-      res.status(200).json({...req.body,_id:notes.id});
+      // res.status(200).json({...req.body,_id:notes.id});
+      res.status(200).json(savedNote);
     } catch (error) {
       console.log(error);
     }
@@ -39,8 +41,8 @@ router.get("/fetchnotes", fetchuser, async (req, res) => {
     console.log(notes);
     res.status(200).json(notes);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.log("Internal Server Error: ",error);
+    // res.status(500).json({ message: "Internal Server Error" });
   }
 });
 router.put("/updatenote/:note_id", fetchuser, async (req, res) => {
@@ -57,7 +59,7 @@ router.put("/updatenote/:note_id", fetchuser, async (req, res) => {
       res.status(401).json({ message: "Unauthorized Token" });
     }
     const newNote = {};
-    const { title, description, author, tag } = req.body;
+    const { title, description, author, tags } = req.body;
     if (title) {
       newNote.title = title;
     }
@@ -67,8 +69,9 @@ router.put("/updatenote/:note_id", fetchuser, async (req, res) => {
     if (author) {
       newNote.author = author;
     }
-    if (tag) {
-      newNote.tag = tag;
+    if (tags) {
+      newNote.tags = tags;
+      // console.log(tags,"oooooooooooooooooooooooooooooooooooooooooo")
     }
     note = await Notes.findByIdAndUpdate(
       req.params.note_id,
@@ -83,17 +86,18 @@ router.put("/updatenote/:note_id", fetchuser, async (req, res) => {
 });
 router.delete("/deletenote/:note_id", fetchuser, async (req, res) => {
   try {
-    if (!req.params.note_id) {
+    const deleteNote = await Notes.findById(req.params.note_id);
+    if (!deleteNote) {
       res.status(404).json({ error: "Note Not Found." });
     }
-    const deleteNote = await Notes.findById(req.params.note_id);
     if (deleteNote.user.toString() != req.user.id) {
       res.status(401).json({ error: "Invalid Token." });
     }
     const deletedNote = await Notes.findByIdAndDelete(req.params.note_id);
     res.status(200).json({ deletedNote });
   } catch (error) {
-	res.status(500).json("Internal Server Error");
+    console.log(error)
+	// res.status(500).json({ message: "Internal Server Error" });
   }
 });
 module.exports = router;

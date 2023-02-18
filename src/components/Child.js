@@ -14,7 +14,7 @@
 
 // export default Child;
 import React,{useContext} from 'react'
-import {NoteContexts} from './Parent';
+import {NoteContexts} from './Home';
 
 function Child() {
   const myContext = useContext(NoteContexts);

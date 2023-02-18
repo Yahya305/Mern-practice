@@ -11,5 +11,6 @@
 ---------Points to remember----------
 > Node js doesn't support ES6 import directly.
 > Nodemon is a command-line tool that helps with the speedy development of Node. js applications. It monitors your project directory and automatically restarts your node application when it detects any changes. (npm i -D nodemon)
+> <npm i cors> to fix cors issue. Check [index.js] for more details.
 ____________________Mongo Pass_______________________
 <samyaya2003305>

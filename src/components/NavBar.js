@@ -29,10 +29,10 @@ export default function NavBar() {
             Home
         </NavLink><NavLink to={"/notifications"} style={({isActive})=>isActive? {color:"rgb(43,237,37)"}:null} aria-current="page" href="/" className='navitem'>
             Notifications
-        </NavLink><NavLink to={"/about"} style={({isActive})=>isActive? {color:"rgb(43,237,37)"}:null} aria-current="page" href="/" className='navitem' >
-            About
-        </NavLink><NavLink to={"/imagelab"} style={({isActive})=>isActive? {color:"rgb(43,237,37)"}:null} aria-current="page" href="/" className='navitem'>
-            Image Lab
+        </NavLink><NavLink to={"/signup"} style={({isActive})=>isActive? {color:"rgb(43,237,37)"}:null} aria-current="page" href="/" className='navitem' >
+            Signup
+        </NavLink><NavLink to={"/login"} style={({isActive})=>isActive? {color:"rgb(43,237,37)"}:null} aria-current="page" href="/" className='navitem'>
+            Login
         </NavLink>
       </ul>
     </div>

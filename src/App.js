@@ -1,13 +1,17 @@
 import "./App.scss";
-import Parent from "./components/Parent";
+import Parent from "./components/Home";
 import React, { useContext } from "react";
-import { NoteContexts } from "./components/Parent";
+import { NoteContexts } from "./components/Home";
 import Child from "./components/Child";
 import NavBar from "./components/NavBar";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
+import Home from "./components/Home";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 
 function App() {
-  const mycon = useContext(NoteContexts);
+  // const mycon = useContext(NoteContexts);
+
 
   return (
     <>
@@ -27,8 +31,8 @@ function App() {
             />
             <Route path="/notifications/fam" element={<div>we are fam</div>} />
           </Route>
-          <Route path="/about" element={"about"} />
-          <Route path="/imagelab" element={"imagelab"} />
+          <Route path="/signup" element={<Signup/>} />
+          <Route path="/login" element={<Login/>} />
           <Route path="*" element={"Wrong No."} />
         </Routes>
       </BrowserRouter>
@@ -37,4 +41,5 @@ function App() {
 }
 
 export default App;
+
 // export {FirstName};
