@@ -1,8 +1,11 @@
 import React, {useContext,useRef,useEffect} from 'react'
 import { NoteContexts } from '../Home';
+import { AuthContext } from "../../App";
+
 
 function EditNotes(props) {
-    let context =useContext(NoteContexts);
+  const token= useContext(AuthContext);
+    // let context =useContext(NoteContexts);
     const title = useRef(null);
     const description = useRef(null);
     const author = useRef(null);
@@ -23,13 +26,12 @@ function EditNotes(props) {
             tags: tags.current.value,
             date: getDate(),
           };
-        console.log("todo")
         fetch(`http://localhost:5000/api/notes/updatenote/${props.edit._id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
               "auth-token":
-                "eyJhbGciOiJIUzI1NiJ9.NjNlMmI1ODdjOTk5OWMyNTRiMGU2Nzc1.ECdY6vQhjfrA5yXKluVItODP-8zGpga2qKpqWx3x7bg",
+              `${token.token}`,
             },
             body: JSON.stringify(updatedNote),
           }).then(((res) => res.json(), (rej) => rej.json()))

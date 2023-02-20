@@ -1,27 +1,30 @@
 import React, { useContext, useEffect,useState,useRef } from "react";
 import { NoteContexts } from "./Home";
 import EditNotes from "./Modals/EditNotes";
+import { AuthContext } from "../App";
 
 function ClientNotes(props) {
   const myContext = useContext(NoteContexts);
+  const token= useContext(AuthContext);
   const [notesModal,setNotesModal]= useState(true);
   const editElement= useRef();
 
-
   useEffect(() => {
+
     fetch("http://localhost:5000/api/notes/fetchnotes", {
       method: "GET", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiJ9.NjNlMmI1ODdjOTk5OWMyNTRiMGU2Nzc1.ECdY6vQhjfrA5yXKluVItODP-8zGpga2qKpqWx3x7bg",
+          `${token.token}`,
       },
     })
-      .then((res) => res.json())
+      .then(((res) => res.json(),(rej)=>rej.json()))
       .then((ress) => {
         myContext.update(ress);
-        console.log(ress);  
       });
+            
+    
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getDate = (d) => {
@@ -36,7 +39,7 @@ function ClientNotes(props) {
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiJ9.NjNlMmI1ODdjOTk5OWMyNTRiMGU2Nzc1.ECdY6vQhjfrA5yXKluVItODP-8zGpga2qKpqWx3x7bg",
+        `${token.token}`,
       },
     })
       .then(((res) => res.json(), (rej) => rej.json()))
@@ -44,11 +47,9 @@ function ClientNotes(props) {
         if (res.error) {
           console.log(res.error);
         } else {
-			console.log(res.deletedNote._id,"ressss")
             const newObj=myContext.notes.filter(
               (value) => value._id !==res.deletedNote._id
             )
-			console.log(newObj);
 			myContext.update(newObj)
         }
       });
@@ -70,7 +71,8 @@ function ClientNotes(props) {
       <div className="home">
         <div className="user-notes">
           {/* {myContext.state[0].title} */}
-          {myContext.notes.length===0 && <div>Nothing</div>}
+          {/* {myContext.notes.length===0 && <div>Nothing</div>} */}
+          {/* {myContext.notes} && {myContext.notes.length===0 && <div>Nothing</div>} */}
           {myContext.notes
             ? myContext.notes.map((element) => {
                 return (

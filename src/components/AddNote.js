@@ -1,8 +1,12 @@
 import React, { useContext } from "react";
 import { NoteContexts } from "./Home";
+import { AuthContext } from "../App";
+
 
 function AddNote() {
   const myContext = useContext(NoteContexts);
+  const token= useContext(AuthContext);
+
 
   const date2 = () => {
     let yourDate = new Date();
@@ -43,7 +47,7 @@ function AddNote() {
         headers: {
           "Content-Type": "application/json",
           "auth-token":
-            "eyJhbGciOiJIUzI1NiJ9.NjNlMmI1ODdjOTk5OWMyNTRiMGU2Nzc1.ECdY6vQhjfrA5yXKluVItODP-8zGpga2qKpqWx3x7bg",
+          `${token.token}`,
         },
         body: JSON.stringify(newNote),
       })

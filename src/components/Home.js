@@ -6,15 +6,25 @@
 // }
 
 // export default Notes;
-import React, { useState } from 'react'
+import React, { useState,useEffect, useContext } from 'react'
 import AddNote from './AddNote';
 import ClientNotes from './ClientNotes';
+import { AuthContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 const NoteContexts = React.createContext();
-function NoteContext(props) {
+function Home(props) {
+  const navigate = useNavigate();
   const [notes,setNotes]= useState([])
-  // const [notesModal,setNotesModal]= useState(true);
-  
+  const token = useContext(AuthContext);
+  // const token= localStorage.getItem("token")
+  useEffect(()=>{
+    if (!token.token) {
+      navigate("login")
+    }
+
+  },[])  // eslint-disable-line react-hooks/exhaustive-deps
+
   const update= (a)=>{
     setNotes(a);
   }
@@ -26,13 +36,15 @@ function NoteContext(props) {
     {/* <NoteContexts.Provider value={{notes,update,notesModal,updateModal}}> */}
     <NoteContexts.Provider value={{notes,update}}>
         <AddNote/>
-        <ClientNotes/>
+        {/* {token && <ClientNotes/>} */}
+        {token.token && <ClientNotes/>}
+        {/* <ClientNotes/> */}
     </NoteContexts.Provider>      
     </>
   )
 }
 
-export default NoteContext
+export default Home
 export {NoteContexts}
 
 

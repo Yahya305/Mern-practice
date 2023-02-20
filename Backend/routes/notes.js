@@ -37,11 +37,17 @@ router.post(
 router.get("/fetchnotes", fetchuser, async (req, res) => {
   try {
     // const notes = await Notes.findById(req.user.id)
+    console.log(req.user._id,">>>>")
     const notes = await Notes.find({ user: req.user.id });
+    console.log("<<<<<")
+    if (notes===null) {
+      res.status(200).json({empty:"empty"});
+      
+    }
     console.log(notes);
     res.status(200).json(notes);
   } catch (error) {
-    console.log("Internal Server Error: ",error);
+    console.log("Internal Server Erroraaaa: ",error);
     // res.status(500).json({ message: "Internal Server Error" });
   }
 });
